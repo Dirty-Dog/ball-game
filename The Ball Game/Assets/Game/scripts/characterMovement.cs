@@ -18,8 +18,9 @@ public class characterMovement : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.forward * Time.deltaTime*speed);
+        Move();
     }
-    private void FixedUpdate()
+    private void Move()
     {
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
