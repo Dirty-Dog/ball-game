@@ -8,6 +8,7 @@ public class EnemyScript : MonoBehaviour
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask groundMask, playerMask;
+    public GameObject longRangeSphere;
 
 
 
@@ -56,8 +57,8 @@ public class EnemyScript : MonoBehaviour
 
     private void patroling()
     {
-       
 
+        longRangeSphere.SetActive(true);
         if (!walkPointSet) searchWalkPointRange();
 
         if (walkPointSet)
@@ -95,7 +96,7 @@ public class EnemyScript : MonoBehaviour
     private void chasePlayer()
     {
 
-        
+        longRangeSphere.SetActive(false);
         agent.SetDestination(player.position);
 
     }
@@ -105,5 +106,5 @@ public class EnemyScript : MonoBehaviour
         //here if want to attack
     }
 
-
+    
 }
