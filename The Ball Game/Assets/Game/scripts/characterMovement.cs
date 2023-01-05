@@ -5,13 +5,16 @@ using UnityEngine;
 public class characterMovement : MonoBehaviour
 {
     private CharacterController controller;
-    [SerializeField] private float speed =1f;
+    [SerializeField] private float normalSpeed=1f,speed =1f, abilitySpeed = 1f,abiltyTime = 1f;
+
     //[SerializeField] private float rotationSpeed = 1f;
     private Vector2 startTouchPosition, endTouchPosition;
     // Start is called before the first frame update
+    public bool speedddActivated = false;
     void Start()
     {
         controller = this.GetComponent<CharacterController>();
+        speed = normalSpeed;
     }
 
     // Update is called once per frame
@@ -19,6 +22,12 @@ public class characterMovement : MonoBehaviour
     {
         transform.Translate(Vector3.forward * Time.deltaTime*speed);
         Move();
+        if (Input.GetKeyDown(KeyCode.Space) && speedddActivated)
+        {
+            speedddActivated = false;
+           StartCoroutine(SpeedSpeed());
+            
+        }
     }
     private void Move()
     {
@@ -54,5 +63,16 @@ public class characterMovement : MonoBehaviour
     {
 
         transform.Rotate(new Vector3(0, 90, 0));
+    }
+
+    public void activateSpeeddd(bool a)
+    {
+        speedddActivated = a;
+    }
+    IEnumerator SpeedSpeed()
+    {
+        speed = abilitySpeed;
+        yield return new WaitForSeconds(abiltyTime);
+        speed = normalSpeed;
     }
 }
